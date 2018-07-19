@@ -14,3 +14,15 @@ def lagrange_basis_plot(vecx):
     stiple = np.linspace(start,stop)
     return [plt.plot(stiple,[polys[i](t) for t in stiple])\
             for i in range(len(vecx))]
+
+def lagrange_coords(f,vecx):
+    return np.array([f(x) for x in vecx])
+
+def interpol(coords,polys,t):
+    scale = [lambda p, a=a: p * a for a in coords]
+    return sum([scale[i](polys[i](t)) for i in range(len(vecx))])
+
+def newton_basis(vecx):
+    return
+
+dd = lambda f, vecx : ((dd(vecx.del[0],f)-dd(vecx.del[-1],f))/(vecx[-1]-vecx[0]) if len(vecx)>1 else f(vecx))
