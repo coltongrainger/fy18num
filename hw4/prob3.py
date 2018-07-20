@@ -25,4 +25,4 @@ def interpol(coords,polys,t):
 def newton_basis(vecx):
     return
 
-dd = lambda f, vecx : ((dd(vecx.del[0],f)-dd(vecx.del[-1],f))/(vecx[-1]-vecx[0]) if len(vecx)>1 else f(vecx))
+dd = lambda f, vecx: ((dd(f,vecx[1:])-dd(f,vecx[:-1]))/(vecx[-1]-vecx[0]) if len(vecx)>1 else f(vecx[0]))
