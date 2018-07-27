@@ -26,7 +26,7 @@ def interpol(coords,polys,t):
     scale = [lambda p, a=a: p * a for a in coords]
     # sums to form the desired linear combination
     # returns a (floating point) scalar
-    return sum([scale[i](polys[i](t)) for i in range(len(vecx))])
+    return sum([scale[i](polys[i](t)) for i in range(len(polys))])
 
 def newton_basis(vecx):
     n = len(vecx)
