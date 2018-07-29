@@ -1,0 +1,1023 @@
+
+
+
+
+    
+\documentclass{article}
+    
+    \usepackage{parskip}
+    \setcounter{secnumdepth}{0} %Suppress section numbers
+    \usepackage[breakable]{tcolorbox}
+    \tcbset{nobeforeafter}
+    \usepackage{needspace}
+    
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage[T1]{fontenc}
+    \usepackage[sfdefault,scaled=0.85]{FiraSans}
+    \usepackage[small,euler-digits]{eulervm}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \usepackage{graphicx}
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.6\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    \let\Oldtex\TeX     % provide compatibility with nbconvert <= 5.3.1
+    \let\Oldlatex\LaTeX % pre-included in nbconvert > 5.3.1 so redundant
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},fontsize=\small}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{2018-07-19-interpolation}
+    
+    
+    
+% Pygments definitions
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+	%Reconfigured pygments
+	\makeatletter
+	\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[HTML]{008800}{##1}}} %numbers
+	\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[HTML]{008800}{##1}}} %numbers
+	\expandafter\def\csname PY@tok@nn\endcsname{\def\PY@tc##1{\textcolor[HTML]{000000}{##1}}} %imports
+	\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[HTML]{008000}{##1}}} %in
+	\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{\codetrue##1\codefalse}}} %operators
+	\makeatother
+
+	\newif\ifcode
+	\codefalse
+	\definecolor{purp}{HTML}{AA22FF}
+	%If using XeLaTeX, use magic to highlight operators in purple.
+	\ifdefined\XeTeXcharclass
+	\XeTeXinterchartokenstate = 1
+	\newXeTeXintercharclass \mycharclassPurple
+	\XeTeXcharclass `\* \mycharclassPurple
+	\XeTeXcharclass `\/ \mycharclassPurple
+	\XeTeXcharclass `\+ \mycharclassPurple
+	\XeTeXcharclass `\- \mycharclassPurple
+	\XeTeXcharclass `\@ \mycharclassPurple
+	\XeTeXcharclass `\% \mycharclassPurple
+	\XeTeXcharclass `\& \mycharclassPurple
+	\XeTeXcharclass `\| \mycharclassPurple
+	\XeTeXcharclass `\! \mycharclassPurple
+	\XeTeXcharclass `\< \mycharclassPurple
+	\XeTeXcharclass `\> \mycharclassPurple
+	\XeTeXcharclass `\~ \mycharclassPurple
+	\XeTeXcharclass `\^ \mycharclassPurple
+	\XeTeXcharclass `\? \mycharclassPurple
+
+	\XeTeXinterchartoks 0 \mycharclassPurple   = {\bgroup\ifcode\color{purp}\else\fi}
+	\XeTeXinterchartoks 4095 \mycharclassPurple = {\bgroup\ifcode\color{purp}\else\fi}
+
+	\XeTeXinterchartoks \mycharclassPurple 0   = {\egroup}
+	\XeTeXinterchartoks \mycharclassPurple 4095 = {\egroup}
+	\fi %end magical operator highlighting
+	%End Reconfigured Pygments
+	
+   
+    % Exact colors from NB
+    \definecolor{incolor}{HTML}{303F9F}
+    \definecolor{outcolor}{HTML}{D84315}
+    \definecolor{cellborder}{HTML}{CFCFCF}
+    \definecolor{cellbackground}{HTML}{F7F7F7}
+
+    % needed definitions
+    \newif\ifleftmargins
+    \newlength{\promptlength}
+
+    % cell style settings
+        \leftmarginstrue
+
+    
+	% prompt
+    \newcommand{\prompt}[3]{
+        \needspace{1.1cm}
+        \settowidth{\promptlength}{ #1 [#3] }
+        \ifleftmargins\hspace{-\promptlength}\hspace{-5pt}\fi
+        {\color{#2}#1 [#3]:}
+        \ifleftmargins\vspace{-2.7ex}\fi
+    }
+	
+	
+    % environments
+    \newenvironment{InVerbatim}{\VerbatimEnvironment%
+		\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,
+			colback=cellbackground, colframe=cellborder]
+			\begin{Verbatim}
+			}{
+			\end{Verbatim}
+		\end{tcolorbox}
+	}
+	\newenvironment{OutVerbatim}{\VerbatimEnvironment%
+		\begin{tcolorbox}[breakable, boxrule=.5pt, size=fbox, pad at break*=1mm, opacityfill=0]
+			\begin{Verbatim}
+			}{
+			\end{Verbatim}
+		\end{tcolorbox}
+	}
+	
+    %Updated MathJax Compatibility (if future behaviour of the notebook changes this may be removed)
+    \renewcommand{\TeX}{\ifmmode \textrm{\Oldtex} \else \textbackslash TeX \fi}
+    \renewcommand{\LaTeX}{\ifmmode \Oldlatex \else \textbackslash LaTeX \fi}
+    
+    % Header Adjustments
+    \renewcommand{\paragraph}{\textbf}
+    \renewcommand{\subparagraph}[1]{\textit{\textbf{#1}}}
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    
+    
+    
+
+    
+    \hypertarget{interpolation}{%
+\section{Interpolation}\label{interpolation}}
+
+\hypertarget{polynomial-approximation}{%
+\subsection{Polynomial approximation}\label{polynomial-approximation}}
+
+We'll write two series of functions to generate the interpolating
+polynomial as a vector in the space \(\mathcal{P}_n\) of polynomials
+with degree at most \(n\). The first will generate a basis of
+polynomials in the Lagrange form, the latter will do so in the Newton
+form. Both will then interpolate an arbitrary function \(f \in C[a,b]\)
+at a finite number of points \(x_i \in [a,b]\).
+
+\hypertarget{lagrange-form}{%
+\subsubsection{Lagrange form}\label{lagrange-form}}
+
+Consider \(f \in C[a,b]\) (the set of continuous real-valued functions
+on the compact interval \([a,b]\)), and let \(x_0,\ldots,x_n\) be
+\(n+1\) distinct points. Does there exist polynomial of least degree
+\(p \in \mathbf{R}[x]\) which \emph{interpolates} \(f\) at the given
+points? such that \(f(x_i) = p(x_i)\) for all
+\(i \in \{0,1,\ldots,n\}\)? Is it unique?
+
+The fundamental theorem of algebra guarantees uniqueness (the difference
+between any two least degree interpolating polynomials is the zero
+polynomial), and the Lagrange form of the interpolating polynomial
+demonstrates existence.
+
+Having \(n+1\) distinct points \(x_i\) specified, the \(n+1\) Lagrange
+polynomials \(\ell_k\) are written as the product
+\[\ell_k(x) = \prod_{i\neq k} \frac{x-x_i}{x_k-x_i} \text{ for all } k \in \{0,1,\ldots,n\}.\]
+
+That is:
+
+    
+\prompt{In}{incolor}{16}
+\begin{InVerbatim}[fontsize=\small,commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+\PY{k+kn}{import} \PY{n+nn}{math}
+
+\PY{k}{def} \PY{n+nf}{lagrange\PYZus{}basis}\PY{p}{(}\PY{n}{vecx}\PY{p}{)}\PY{p}{:}
+    \PY{n}{n} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{vecx}\PY{p}{)}
+    \PY{c+c1}{\PYZsh{} choose n\PYZhy{}1 of n entries}
+    \PY{n}{hinges} \PY{o}{=} \PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{vecx}\PY{p}{[}\PY{p}{:}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{vecx}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{]}
+    \PY{c+c1}{\PYZsh{} take product of n\PYZhy{}1 terms, format into lambda functions}
+    \PY{n}{polys} \PY{o}{=} \PY{p}{[}\PY{k}{lambda} \PY{n}{t}\PY{p}{,} \PY{n}{i}\PY{o}{=}\PY{n}{i}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{prod}\PY{p}{(}\PY{p}{(}\PY{n}{t}\PY{o}{\PYZhy{}}\PY{n}{hinges}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{vecx}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{hinges}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PYZbs{}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{]}
+    \PY{c+c1}{\PYZsh{} returns a list of n functions, the Lagrange basis polynomials}
+    \PY{k}{return} \PY{n}{polys}
+\end{InVerbatim}
+
+    It can be shown that the set of \(n+1\) Lagrange polynomials spans
+\(\mathcal{P}_n\). We note the Lagrange polynomials form a basis for
+\(\mathcal{P}_n\) since \(\dim(\mathcal{P}_n) = n+1\).
+
+For example:
+
+    
+\prompt{In}{incolor}{17}
+\begin{InVerbatim}[fontsize=\small,commandchars=\\\{\}]
+\PY{n}{vecx} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}
+
+\PY{k}{def} \PY{n+nf}{lagrange\PYZus{}basis\PYZus{}plot}\PY{p}{(}\PY{n}{vecx}\PY{p}{)}\PY{p}{:}
+    \PY{n}{polys} \PY{o}{=} \PY{n}{lagrange\PYZus{}basis}\PY{p}{(}\PY{n}{vecx}\PY{p}{)}
+    \PY{n}{start}\PY{p}{,} \PY{n}{stop} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{n}{vecx}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{vecx}\PY{p}{)}
+    \PY{n}{stiple} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n}{start}\PY{p}{,}\PY{n}{stop}\PY{p}{)}
+    \PY{c+c1}{\PYZsh{} returns a list of plots of the basis polynomials, overlaid}
+    \PY{k}{return} \PY{p}{[}\PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{stiple}\PY{p}{,}\PY{p}{[}\PY{n}{polys}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{(}\PY{n}{t}\PY{p}{)} \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n}{stiple}\PY{p}{]}\PY{p}{)}\PYZbs{}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{vecx}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+
+\PY{n}{lagrange\PYZus{}basis\PYZus{}plot}\PY{p}{(}\PY{n}{vecx}\PY{p}{)}
+\end{InVerbatim}
+
+            
+\prompt{Out}{outcolor}{17}
+\begin{OutVerbatim}[fontsize=\small,commandchars=\\\{\}]
+[[<matplotlib.lines.Line2D at 0x7f2950f311d0>],
+ [<matplotlib.lines.Line2D at 0x7f2950f31390>],
+ [<matplotlib.lines.Line2D at 0x7f2950f318d0>],
+ [<matplotlib.lines.Line2D at 0x7f2950f31d30>]]
+\end{OutVerbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{2018-07-19-interpolation_files/2018-07-19-interpolation_3_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Now, to show the existence of an interpolating polynomial, we'll specify
+a linear combination of basis vectors \(\{\ell_k : k=0,1,\ldots,n\}\).
+
+Let \(f \in C[a,b]\), and specify \(n+1\) distinct points \(x_i\). The
+interpolating polynomial in Lagrange form is \(p_n \in \mathcal{P}_n\)
+where \[p_n(x) = \sum_{k=0}^n f(x_k) \ell_k(x).\]
+
+We'll scale our basis polynomials:
+
+    
+\prompt{In}{incolor}{18}
+\begin{InVerbatim}[fontsize=\small,commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{lagrange\PYZus{}coords}\PY{p}{(}\PY{n}{f}\PY{p}{,}\PY{n}{vecx}\PY{p}{)}\PY{p}{:}
+    \PY{c+c1}{\PYZsh{} returns the n coordinates of the interpolating polynomial}
+    \PY{c+c1}{\PYZsh{} as a vector in \PYZdl{}\PYZbs{}mathcal\PYZob{}P\PYZcb{}\PYZus{}n\PYZdl{} with the Lagrange basis}
+    \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{f}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{vecx}\PY{p}{]}\PY{p}{)}
+
+\PY{k}{def} \PY{n+nf}{interpol}\PY{p}{(}\PY{n}{coords}\PY{p}{,}\PY{n}{polys}\PY{p}{,}\PY{n}{t}\PY{p}{)}\PY{p}{:}
+    \PY{c+c1}{\PYZsh{} scales each vector by its coordinate}
+    \PY{n}{scale} \PY{o}{=} \PY{p}{[}\PY{k}{lambda} \PY{n}{p}\PY{p}{,} \PY{n}{a}\PY{o}{=}\PY{n}{a}\PY{p}{:} \PY{n}{p} \PY{o}{*} \PY{n}{a} \PY{k}{for} \PY{n}{a} \PY{o+ow}{in} \PY{n}{coords}\PY{p}{]}
+    \PY{c+c1}{\PYZsh{} sums to form the desired linear combination}
+    \PY{c+c1}{\PYZsh{} returns a (floating point) scalar}
+    \PY{k}{return} \PY{n+nb}{sum}\PY{p}{(}\PY{p}{[}\PY{n}{scale}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{(}\PY{n}{polys}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{(}\PY{n}{t}\PY{p}{)}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{polys}\PY{p}{)}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+\end{InVerbatim}
+
+    Since the degree of any linear combination of Lagrange polynomials
+(generated by \(n+1\) distinct points) is \(n\), and evaluated at any of
+the \(n+1\) generating points \(x_i\), the Lagrange \(k\)th polynomial
+is equal to the Kroenecker delta
+\[\delta_{ik} = \begin{cases} 1 &\text{ if } i=k\\ 0 &\text{ else,} \end{cases}\]
+we have the least degree interpolating polynomial that we sought the
+existence of, \(p_n\).
+
+Consider the function \(f(x) = e^x\), and the points \(\{0,1,2,3\}\).
+
+We can compute:
+
+    
+\prompt{In}{incolor}{19}
+\begin{InVerbatim}[fontsize=\small,commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{math}
+
+\PY{n}{f} \PY{o}{=} \PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{math}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} to specify the interpolating poly, p}
+\PY{n}{polys} \PY{o}{=} \PY{n}{lagrange\PYZus{}basis}\PY{p}{(}\PY{n}{vecx}\PY{p}{)}
+\PY{n}{coords} \PY{o}{=} \PY{n}{lagrange\PYZus{}coords}\PY{p}{(}\PY{n}{f}\PY{p}{,}\PY{n}{vecx}\PY{p}{)}
+\PY{n}{p} \PY{o}{=} \PY{k}{lambda} \PY{n}{t}\PY{p}{:} \PY{n}{interpol}\PY{p}{(}\PY{n}{coords}\PY{p}{,} \PY{n}{polys}\PY{p}{,} \PY{n}{t}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} here\PYZsq{}s a couple evaluations}
+\PY{c+c1}{\PYZsh{} notice interpolation has small relative error}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{exp(1.5) is approx  }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{p}\PY{p}{(}\PY{l+m+mf}{1.5}\PY{p}{)}\PY{p}{)} 
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{exp(1.5) is exactly }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{math}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{l+m+mf}{1.5}\PY{p}{)}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} while exterpolation may have great relative error}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{exp(4.0) is approx  }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{p}\PY{p}{(}\PY{l+m+mf}{4.0}\PY{p}{)}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{exp(4.0) is exactly }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{math}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{l+m+mf}{4.0}\PY{p}{)}\PY{p}{)}
+\end{InVerbatim}
+
+    \begin{Verbatim}[fontsize=\small,commandchars=\\\{\}]
+exp(1.5) is approx   4.3675315264574746
+exp(1.5) is exactly  4.4816890703380645
+exp(4.0) is approx   45.88093841300295
+exp(4.0) is exactly  54.598150033144236
+
+    \end{Verbatim}
+
+    
+\prompt{In}{incolor}{20}
+\begin{InVerbatim}[fontsize=\small,commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} we sample 50 points in the interval}
+\PY{n}{start}\PY{p}{,}\PY{n}{stop} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{n}{vecx}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{vecx}\PY{p}{)}
+\PY{n}{stiple} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n}{start}\PY{p}{,}\PY{n}{stop}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} evaluate them to make a plot for p}
+\PY{n}{fstiple} \PY{o}{=} \PY{p}{[}\PY{n}{interpol}\PY{p}{(}\PY{n}{coords}\PY{p}{,} \PY{n}{polys}\PY{p}{,} \PY{n}{t}\PY{p}{)} \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n}{stiple}\PY{p}{]}
+\PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{stiple}\PY{p}{,}\PY{n}{fstiple}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} and overlay the exact plot f}
+\PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{stiple}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{f}\PY{p}{(}\PY{n}{t}\PY{p}{)} \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n}{stiple}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{InVerbatim}
+
+            
+\prompt{Out}{outcolor}{20}
+\begin{OutVerbatim}[fontsize=\small,commandchars=\\\{\}]
+[<matplotlib.lines.Line2D at 0x7f29510452b0>]
+\end{OutVerbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{2018-07-19-interpolation_files/2018-07-19-interpolation_8_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{newton-form}{%
+\subsubsection{Newton form}\label{newton-form}}
+
+The Newton form allows us to compute \(p_n\) from \(p_{n-1}\)
+recursively. That is, we define \(p_n\) with the same \(n-1\) basis
+vectors and \(n-1\) coordinates as \(p_{n-1}\), but add a basis vector
+that's \(0\) at all points \(x_i\) where \(i<n\).
+
+Namely, \[p_n(x) = p_{n-1}(x)+a_n\prod_{i < n} (x-x_i)\] with
+\[a_n = \left(f(x_n) - p_{n-1}(x_n)\right)\left(\prod_{i < n} (x_n-x_i)\right)^{-1}.\]
+
+Here's a constructive definition, with accompanying plots for the same
+generating points \(\{0,1,2,3\}\).
+
+    
+\prompt{In}{incolor}{21}
+\begin{InVerbatim}[fontsize=\small,commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{newton\PYZus{}basis}\PY{p}{(}\PY{n}{vecx}\PY{p}{)}\PY{p}{:}
+    \PY{n}{n} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{vecx}\PY{p}{)}
+    \PY{c+c1}{\PYZsh{} returns a list of n functions, the newton form basis polynomials}
+    \PY{k}{return} \PY{p}{[}\PY{k}{lambda} \PY{n}{t}\PY{p}{,} \PY{n}{j}\PY{o}{=}\PY{n}{j}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{prod}\PY{p}{(}\PY{p}{[}\PY{n}{t}\PY{o}{\PYZhy{}}\PY{n}{vecx}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{j}\PY{p}{)}\PY{p}{]}\PY{p}{)}\PYZbs{}
+            \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{]}
+
+\PY{k}{def} \PY{n+nf}{newton\PYZus{}basis\PYZus{}plot}\PY{p}{(}\PY{n}{vecx}\PY{p}{)}\PY{p}{:}
+    \PY{n}{polys} \PY{o}{=} \PY{n}{newton\PYZus{}basis}\PY{p}{(}\PY{n}{vecx}\PY{p}{)}
+    \PY{n}{start}\PY{p}{,} \PY{n}{stop} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{n}{vecx}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{vecx}\PY{p}{)}
+    \PY{n}{stiple} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n}{start}\PY{p}{,}\PY{n}{stop}\PY{p}{)}
+    \PY{c+c1}{\PYZsh{} returns a list of plots of the basis polynomials, overlaid}
+    \PY{k}{return} \PY{p}{[}\PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{stiple}\PY{p}{,}\PY{p}{[}\PY{n}{polys}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{(}\PY{n}{t}\PY{p}{)} \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n}{stiple}\PY{p}{]}\PY{p}{)}\PYZbs{}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{vecx}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+
+\PY{n}{newton\PYZus{}basis\PYZus{}plot}\PY{p}{(}\PY{n}{vecx}\PY{p}{)}
+\end{InVerbatim}
+
+            
+\prompt{Out}{outcolor}{21}
+\begin{OutVerbatim}[fontsize=\small,commandchars=\\\{\}]
+[[<matplotlib.lines.Line2D at 0x7f2950e414a8>],
+ [<matplotlib.lines.Line2D at 0x7f2950e41668>],
+ [<matplotlib.lines.Line2D at 0x7f2950e41b38>],
+ [<matplotlib.lines.Line2D at 0x7f2950e41f98>]]
+\end{OutVerbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{2018-07-19-interpolation_files/2018-07-19-interpolation_10_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    In practice we express the coordinate \(a_n\) in recursive \emph{divided
+differences}, i.e.,
+\[a_n = f[x_0,\ldots,x_n] = \frac{f[x_1, \ldots, x_n] - f[x_0, \ldots, x_{n-1}]}{x_n-x_0}\]
+where the identification \(f[x] = f(x)\) for all \(x\) is the base for
+recursion.
+
+    
+\prompt{In}{incolor}{22}
+\begin{InVerbatim}[fontsize=\small,commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{dd}\PY{p}{(}\PY{n}{f}\PY{p}{,} \PY{n}{vecx}\PY{p}{)}\PY{p}{:}
+    \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{vecx}\PY{p}{)}\PY{o}{\PYZgt{}}\PY{l+m+mi}{1}\PY{p}{:}
+    \PY{c+c1}{\PYZsh{} recursive call, returns the coordinate of the nth newton poly}
+        \PY{k}{return} \PY{p}{(}\PY{n}{dd}\PY{p}{(}\PY{n}{f}\PY{p}{,}\PY{n}{vecx}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{dd}\PY{p}{(}\PY{n}{f}\PY{p}{,}\PY{n}{vecx}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{vecx}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{vecx}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+    \PY{c+c1}{\PYZsh{} floor of recursion}
+    \PY{k}{else}\PY{p}{:}
+        \PY{k}{return} \PY{n}{f}\PY{p}{(}\PY{n}{vecx}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+
+\PY{k}{def} \PY{n+nf}{newton\PYZus{}coords}\PY{p}{(}\PY{n}{f}\PY{p}{,} \PY{n}{vecx}\PY{p}{)}\PY{p}{:}
+    \PY{c+c1}{\PYZsh{} TODO: save the recursive divided difference calls in memory}
+    \PY{c+c1}{\PYZsh{} so we don\PYZsq{}t have to iterate to load them into this array}
+    \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{dd}\PY{p}{(}\PY{n}{f}\PY{p}{,}\PY{n}{vecx}\PY{p}{[}\PY{p}{:}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{vecx}\PY{p}{)}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+\end{InVerbatim}
+
+    When working with more than a thousand generating points (i.e., for
+\texttt{len(vecx)} greater than \texttt{1000}), we'd have to rewrite the
+above programs to cache intermediate recursive function calls. The most
+straight forward means to cache the divided differences is in a
+triangular matrix, writing an imperative program to append new diagonals
+for the calculation of the \(n\)th coefficient \(a_n\).
+
+(A dynamically typed language, Python is not written to cache recursive
+calls, and generally taps out at 1000 levels deep. Pure functional,
+strictly typed languages like Haskell have compilers optimized to cache
+all recursions, and as well won't complain at any number of recursive
+calls.)
+
+Anyways, just to show the code runs:
+
+    
+\prompt{In}{incolor}{23}
+\begin{InVerbatim}[fontsize=\small,commandchars=\\\{\}]
+\PY{n}{polys} \PY{o}{=} \PY{n}{newton\PYZus{}basis}\PY{p}{(}\PY{n}{vecx}\PY{p}{)}
+\PY{n}{coords} \PY{o}{=} \PY{n}{newton\PYZus{}coords}\PY{p}{(}\PY{n}{f}\PY{p}{,}\PY{n}{vecx}\PY{p}{)}
+\PY{n}{start}\PY{p}{,}\PY{n}{stop} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{n}{vecx}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{vecx}\PY{p}{)}
+\PY{n}{stiple} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n}{start}\PY{p}{,}\PY{n}{stop}\PY{p}{)}
+\PY{n}{fstiple} \PY{o}{=} \PY{p}{[}\PY{n}{interpol}\PY{p}{(}\PY{n}{coords}\PY{p}{,} \PY{n}{polys}\PY{p}{,} \PY{n}{t}\PY{p}{)} \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n}{stiple}\PY{p}{]}
+\PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{stiple}\PY{p}{,}\PY{n}{fstiple}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{stiple}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{f}\PY{p}{(}\PY{n}{t}\PY{p}{)} \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n}{stiple}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{InVerbatim}
+
+            
+\prompt{Out}{outcolor}{23}
+\begin{OutVerbatim}[fontsize=\small,commandchars=\\\{\}]
+[<matplotlib.lines.Line2D at 0x7f2950f18f60>]
+\end{OutVerbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{2018-07-19-interpolation_files/2018-07-19-interpolation_14_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We note the Newton form,
+\[p_n(x) = a_0 + a_1(x-x_0) + \cdots + a_n(x-x_0)\cdots(x-x_{n-1})\] can
+be optimized also to be evaluated in \(O(n)\) operations, namely, \(n\)
+multiplications and \(n\) additions, by factoring
+\[p_n(x) =  a_0 + (x-x_0)\bigg(a_1 + (x-x_1)\Big(a_2+\cdots + a_n(x-x_{n-1})\cdots\Big)\bigg).\]
+
+Our code presently \emph{does not} redistribute parentheses to save
+computation, instead, it's written to compute each basis polynomial
+explicitly (in however many multiplications), scale them all, then sum.
+Such operations correspond closing with the matrix interpretation of the
+constraint \(p_n = f\) at \(n+1\) points \(x_i\).
+
+\hypertarget{matrix-interpretation}{%
+\subsubsection{Matrix interpretation}\label{matrix-interpretation}}
+
+For \(n+1\) generating points \((x_i,f(x_i))\), there is a unique
+interpolating polynomial \(p_n\) of degree \(n\).
+
+But \(p_n\) is just point in the vector space \(\mathcal{P}_n\), so we
+should try to express the constraint that \(p_n(x_i) = f(x_i)\) for all
+\(i \in \{0,1,\ldots,n\}\) as \(n+1\) linear equations to determine the
+coordinates of \(p_n\).
+
+The constraint as a matrix equation (in any basis) is
+\[A \begin{pmatrix}a_0\\ \vdots\\ a_n\end{pmatrix} = \begin{pmatrix}f(x_0)\\ \vdots\\ f(x_n)\end{pmatrix}.\]
+
+We are required to choose a basis for \(\mathcal{P}_n\), and we've thus
+far seen two:
+
+\begin{itemize}
+\tightlist
+\item
+  the Lagrange polynomials \(\{\ell_0, \ell_1, \ldots, \ell_n\}\)
+\item
+  the basis of the Newton form \(\{1, (x-x_0), \ldots, (x-x_n)\}\)
+\end{itemize}
+
+For the Lagrange polynomial basis, we have simply \(A = I\). In the
+Newton basis, \(A\) is a lower triangular matrix.
+
+A third basis, the standard basis \(\{1,x,x^2,\ldots, x^n\}\), yields a
+power series approximation to \(f\), but corresponds to the highly
+ill-conditioned \emph{Vandermode} matrix.
+
+\hypertarget{error-analysis}{%
+\subsubsection{Error analysis}\label{error-analysis}}
+
+Let \(f \in C^{n+1}[a,b]\), the \(x_i\) be \(n+1\) distinct points in
+\([a,b]\), and suppose \(p_n\) is a polynomial of degree at most \(n\)
+that interpolates \(f\) at the \(x_i\). Given \(x \in [a,b]\), there
+exists a point \(\xi \in (a,b)\) such that
+\[f(x) = p_n(x) + \frac{f^{(n+1)}(\xi)}{(n+1)!}\prod_{\forall i}(x-x_i).\]
+
+For example, interpolating \(f = x \mapsto e^x\) on \([0,3]\) with the
+generating points \(\{0,1,2,3\}\), the error is constrained:
+
+    
+\prompt{In}{incolor}{24}
+\begin{InVerbatim}[fontsize=\small,commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{sympy} \PY{k}{as} \PY{n+nn}{sym}
+\PY{n}{z} \PY{o}{=} \PY{n}{sym}\PY{o}{.}\PY{n}{symbols}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{prod} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{prod}\PY{p}{(}\PY{p}{[}\PY{n}{z}\PY{o}{\PYZhy{}}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+\PY{n}{max\PYZus{}prod} \PY{o}{=} \PY{n+nb}{max}\PY{p}{(}\PY{p}{[}\PY{n}{prod}\PY{o}{.}\PY{n}{subs}\PY{p}{(}\PY{n}{z}\PY{p}{,}\PY{n}{t}\PY{p}{)} \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n}{sym}\PY{o}{.}\PY{n}{solve}\PY{p}{(}\PY{n}{sym}\PY{o}{.}\PY{n}{diff}\PY{p}{(}\PY{n}{prod}\PY{p}{,}\PY{n}{z}\PY{p}{)}\PY{p}{,} \PY{n}{z}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+\PY{c+c1}{\PYZsh{} take the worst xi possible, namely, xi=3}
+\PY{n}{max\PYZus{}error} \PY{o}{=} \PY{p}{(}\PY{n}{math}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{24}\PY{p}{)}\PY{o}{*}\PY{n}{max\PYZus{}prod}
+\PY{n}{max\PYZus{}error}
+\end{InVerbatim}
+
+            
+\prompt{Out}{outcolor}{24}
+\begin{OutVerbatim}[fontsize=\small,commandchars=\\\{\}]
+0.470754771637211
+\end{OutVerbatim}
+        
+    \hypertarget{determining-the-minimal-degree}{%
+\subsection{Determining the minimal
+degree}\label{determining-the-minimal-degree}}
+
+Here's a linear algebraic method to determine the degree of the minimal
+interpolating polynomial for a continuous function sampled at \(n+1\)
+distinct points. It's equivalent to the computing the Newton form of the
+interpolating polynomial through divided differences, but emphasises
+that the constraints \(p(x_i) = f(x_i)\) can be satisfied with a exactly
+one linear combination of vectors in the Newton form polynomial basis.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Write out the Newton form of the matrix \(A\) in the constraint
+  equation,
+  \(A \begin{pmatrix}a_0\\ \vdots\\ a_n\end{pmatrix} = \begin{pmatrix}f(x_0)\\ \vdots\\ f(x_n)\end{pmatrix}\).
+\end{enumerate}
+
+\[A = \begin{pmatrix} 1 & & & 0\\
+                       1 &(x_1 - x_0) & & \\
+                       \vdots & \vdots & \ddots & \\
+                       1 &(x_n - x_0) &\cdots &\prod_{i<n}(x_n - x_i)
+       \end{pmatrix}\]
+
+Elementwise, that's
+\[(A_{ij}) = \left(\prod_{k=0}^{j-1} (x_i - x_k)\right).\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\item
+  Compute its inverse \(A^{-1}\) (which exists as \(\det A\) is the
+  product of \(A\)'s nonzero diagonal entries).
+\item
+  Multiply
+  \(A^{-1} \begin{pmatrix}f(x_0)\\ \vdots\\ f(x_n)\end{pmatrix}\) to
+  find \(\vec{a} = \begin{pmatrix}a_0\\ \vdots\\ a_n\end{pmatrix}\).
+\item
+  The degree of the interpolating polynomial is the index of the last
+  nonzero element in \(\vec{a}\).
+\end{enumerate}
+
+As a basic example, consider the points \((0,1)\), \((1,1)\), and
+\((2,1)\); these are interpolated by the constant polynomial \(p = 1\).
+Our method should corroborate this conclusion.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  With the Newton form of the basis, the matrix \(A\) is given
+  \[A = \begin{pmatrix} 1 & 0 & 0\\ 1 & 1 & 0 \\ 1 & 2 & 2\end{pmatrix}.\]
+\item
+  The inverse exists and is given by
+  \[A^{-1}= \begin{pmatrix} 1 & 0 & 0 \\ -1 & 1 & 0\\ \frac12 & -1 & \frac12 \end{pmatrix}.\]
+\item
+  The coefficient vector \(\vec{a}\) is thus
+  \[A^{-1} \begin{pmatrix}1 \\ 1 \\ 1\end{pmatrix} = \begin{pmatrix} 1\\0\\0\end{pmatrix}.\]
+\item
+  The degree of the interpolating polynomial is therefore \(0\), as
+  \(a_0 = 1\) is the last non-zero entry in the coefficient vector. It
+  follows that the interpolating polynomial has the (Newton) form
+  \[p = \begin{pmatrix}1\\0\\0\end{pmatrix}\cdot\begin{pmatrix}x^0 \\x^1\\x^2\end{pmatrix} = 1\cdot x^0 + 0\cdot x^1 + 0 \cdot x^2.\]
+\end{enumerate}
+
+Proceeding in the same fashion, we can find the degree of the minimal
+polynomial that interpolates the following \(6\) points:
+
+    
+\prompt{In}{incolor}{25}
+\begin{InVerbatim}[fontsize=\small,commandchars=\\\{\}]
+\PY{n}{points} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}  \PY{l+m+mi}{0}\PY{p}{,}  \PY{l+m+mi}{1}\PY{p}{,}  \PY{l+m+mi}{2}\PY{p}{,}  \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{5}\PY{p}{,}  \PY{l+m+mi}{1}\PY{p}{,}  \PY{l+m+mi}{1}\PY{p}{,}  \PY{l+m+mi}{1}\PY{p}{,}  \PY{l+m+mi}{7}\PY{p}{,} \PY{l+m+mi}{25}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+
+\PY{k}{def} \PY{n+nf}{nfA}\PY{p}{(}\PY{n}{vecx}\PY{p}{)}\PY{p}{:}
+    \PY{n}{n} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{vecx}\PY{p}{)}
+    \PY{n}{a} \PY{o}{=} \PY{k}{lambda} \PY{n}{i}\PY{p}{,}\PY{n}{j} \PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{prod}\PY{p}{(}\PY{p}{[}\PY{n}{vecx}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{vecx}\PY{p}{[}\PY{n}{k}\PY{p}{]} \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{j}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+    \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{n}{a}\PY{p}{(}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{)} \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+
+\PY{n}{nfA}\PY{p}{(}\PY{n}{points}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+\end{InVerbatim}
+
+            
+\prompt{Out}{outcolor}{25}
+\begin{OutVerbatim}[fontsize=\small,commandchars=\\\{\}]
+array([[  1.,   0.,   0.,   0.,   0.,   0.],
+       [  1.,   1.,   0.,   0.,   0.,   0.],
+       [  1.,   2.,   2.,   0.,   0.,   0.],
+       [  1.,   3.,   6.,   6.,   0.,   0.],
+       [  1.,   4.,  12.,  24.,  24.,   0.],
+       [  1.,   5.,  20.,  60., 120., 120.]])
+\end{OutVerbatim}
+        
+    
+\prompt{In}{incolor}{26}
+\begin{InVerbatim}[fontsize=\small,commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} this function equivalent to computing divided differences}
+\PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{solve}\PY{p}{(}\PY{n}{nfA}\PY{p}{(}\PY{n}{points}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{points}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+\end{InVerbatim}
+
+            
+\prompt{Out}{outcolor}{26}
+\begin{OutVerbatim}[fontsize=\small,commandchars=\\\{\}]
+array([-5.,  6., -3.,  1.,  0.,  0.])
+\end{OutVerbatim}
+        
+    We see the last nonzero entry in the coefficient vector has index \(3\),
+and therefore the minimal interpolating polynomial has degree \(3\).
+
+\hypertarget{summing-a-set-of-lagrange-polynomials}{%
+\subsection{Summing a set of Lagrange
+polynomials}\label{summing-a-set-of-lagrange-polynomials}}
+
+Suppose we have \(n+1\) distinct points \(x_i \in \mathbf{R}\). Let the
+\(n+1\) Lagrange polynomials be given by \(\ell_k\) for
+\(k \in \{0,1,\ldots,n\}\). Write \(p_n = \sum_{k=0}^n 1\cdot\ell_k\),
+which interpolates the constant polynomial \(f = 1\). For all real \(x\)
+the error \(\left\lvert f(x) - p_n(x)\right\rvert\) is bounded by
+\[\max_{\xi\in S}\left\lvert\frac{f^{(n+1)}(x)}{(n+1)!}\prod_{\forall i} (\xi - x_i)\right\rvert  = 0\]
+as all derivatives of the constant function \(f\) are identically zero.
+We conclude that \(\sum{k=0}^n \ell_k \equiv 1\in \mathcal{P}_n\).
+
+\hypertarget{optimal-choice-of-sample-points}{%
+\subsection{Optimal choice of sample
+points}\label{optimal-choice-of-sample-points}}
+
+We plot two polynomials \(w_n(x) = \prod_{\forall i} (x-x_i)\) generated
+by a set of \(n+1\) points \(x_i\), the first generated by linearly
+spaced points, the second generated by Chebyshev points.
+
+We'll exploit the identity
+\[\frac{\pi}{n+1}\left(\frac12 + i\right) = \frac{\pi}{2} + \frac{\pi}{2}\cdot\frac{n}{n+1}\left(-1 + \frac{2i}{n}\right)\]
+to express the roots of the \(n\)th Chebyshev polynomial as an
+vectorized transformation of the linearly spaced array \texttt{vecx}.
+
+    
+\prompt{In}{incolor}{27}
+\begin{InVerbatim}[fontsize=\small,commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{w}\PY{p}{(}\PY{n}{vecx}\PY{p}{,} \PY{n}{x}\PY{p}{)}\PY{p}{:} 
+    \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{product}\PY{p}{(}\PY{n}{vecx} \PY{o}{\PYZhy{}} \PY{n}{x}\PY{p}{)}
+
+\PY{k}{def} \PY{n+nf}{chebyshev\PYZus{}transform}\PY{p}{(}\PY{n}{vecx}\PY{p}{)}\PY{p}{:}
+    \PY{n}{n} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{vecx}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}
+    \PY{k}{return} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{vecx}\PY{o}{*}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{*}\PY{n}{n}\PY{o}{/}\PY{p}{(}\PY{n}{n}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}
+
+\PY{k}{def} \PY{n+nf}{w\PYZus{}plot}\PY{p}{(}\PY{n}{vecx}\PY{p}{)}\PY{p}{:}
+    \PY{n}{stiple} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}
+    \PY{n}{w\PYZus{}values} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{w}\PY{p}{(}\PY{n}{vecx}\PY{p}{,} \PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{stiple}\PY{p}{]}\PY{p}{)}
+    \PY{k}{return} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{stiple}\PY{p}{,}\PY{n}{w\PYZus{}values}\PY{p}{)}
+
+\PY{k}{def} \PY{n+nf}{w\PYZus{}contrast}\PY{p}{(}\PY{n}{vecx}\PY{p}{)}\PY{p}{:}
+    \PY{k}{return} \PY{n}{w\PYZus{}plot}\PY{p}{(}\PY{n}{vecx}\PY{p}{)}\PY{p}{,} \PY{n}{w\PYZus{}plot}\PY{p}{(}\PY{n}{chebyshev\PYZus{}transform}\PY{p}{(}\PY{n}{vecx}\PY{p}{)}\PY{p}{)}
+
+\PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{]}\PY{p}{:}
+    \PY{n}{w\PYZus{}contrast}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{i}\PY{p}{)}\PY{p}{)}
+    \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}w\PYZus{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{\PYZcb{}\PYZdl{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{i}\PY{p}{)}
+    \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Linear\PYZhy{}spaced}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Chebyshev}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+    \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{InVerbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{2018-07-19-interpolation_files/2018-07-19-interpolation_21_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{2018-07-19-interpolation_files/2018-07-19-interpolation_21_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{2018-07-19-interpolation_files/2018-07-19-interpolation_21_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Notice the \(l_\infty\) norm of the Chebyshev \(w_n\) is bounded by
+\(2^{1-n}\).
+
+\hypertarget{comparison-chebyshev-and-linearly-spaced-points}{%
+\subsubsection{Comparison: Chebyshev and linearly spaced
+points}\label{comparison-chebyshev-and-linearly-spaced-points}}
+
+Here we interpolate two functions (the absolute value function and its
+first derivative) with the polynomial \(p_n\) (for \(n = 8, 16, 32\))
+generated by \(n+1\) linearly spaced and chebyshev points on the
+interval \([-1,1]\), respectively.
+
+    
+\prompt{In}{incolor}{28}
+\begin{InVerbatim}[fontsize=\small,commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{f1}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:} 
+    \PY{k}{return} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+
+\PY{k}{def} \PY{n+nf}{f2}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:} 
+    \PY{k}{return} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{k}{if} \PY{n}{x}\PY{o}{\PYZlt{}}\PY{l+m+mi}{0} \PY{k}{else} \PY{l+m+mi}{1} \PY{k}{if} \PY{n}{x}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0} \PY{k}{else} \PY{l+m+mi}{0}
+
+\PY{k}{def} \PY{n+nf}{ptuples}\PY{p}{(}\PY{n}{f}\PY{p}{,} \PY{n}{vecx}\PY{p}{)}\PY{p}{:}
+    \PY{n}{polys} \PY{o}{=} \PY{n}{lagrange\PYZus{}basis}\PY{p}{(}\PY{n}{vecx}\PY{p}{)}
+    \PY{n}{coords} \PY{o}{=} \PY{n}{lagrange\PYZus{}coords}\PY{p}{(}\PY{n}{f}\PY{p}{,} \PY{n}{vecx}\PY{p}{)}
+    \PY{n}{stiple} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}
+    \PY{n}{interstiple} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{interpol}\PY{p}{(}\PY{n}{coords}\PY{p}{,}\PY{n}{polys}\PY{p}{,}\PY{n}{t}\PY{p}{)} \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n}{stiple}\PY{p}{]}\PY{p}{)}
+    \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{vstack}\PY{p}{(}\PY{p}{[}\PY{n}{stiple}\PY{p}{,}\PY{n}{interstiple}\PY{p}{]}\PY{p}{)}
+
+\PY{k}{for} \PY{n}{f} \PY{o+ow}{in} \PY{p}{[}\PY{n}{f1}\PY{p}{,}\PY{n}{f2}\PY{p}{]}\PY{p}{:}
+    \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{32}\PY{p}{]}\PY{p}{:}
+        \PY{n}{linear} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{n}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{chebyshev} \PY{o}{=} \PY{n}{chebyshev\PYZus{}transform}\PY{p}{(}\PY{n}{linear}\PY{p}{)}
+        \PY{n}{p\PYZus{}linear} \PY{o}{=} \PY{n}{ptuples}\PY{p}{(}\PY{n}{f}\PY{p}{,} \PY{n}{linear}\PY{p}{)}
+        \PY{n}{p\PYZus{}chebyshev} \PY{o}{=} \PY{n}{ptuples}\PY{p}{(}\PY{n}{f}\PY{p}{,} \PY{n}{chebyshev}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}\PY{p}{[}\PY{n}{f}\PY{p}{(}\PY{n}{t}\PY{p}{)} \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{p\PYZus{}linear}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{p\PYZus{}linear}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{p\PYZus{}chebyshev}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{p\PYZus{}chebyshev}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{f}\PY{o}{.}\PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ approximated by different \PYZdl{}p\PYZus{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{\PYZcb{}\PYZdl{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{n}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{(}\PY{n}{f}\PY{o}{.}\PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Linear\PYZhy{}spaced \PYZdl{}p\PYZus{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{\PYZcb{}\PYZdl{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{n}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Chebyshev \PYZdl{}p\PYZus{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{\PYZcb{}\PYZdl{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{n}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{InVerbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{2018-07-19-interpolation_files/2018-07-19-interpolation_23_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{2018-07-19-interpolation_files/2018-07-19-interpolation_23_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{2018-07-19-interpolation_files/2018-07-19-interpolation_23_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{2018-07-19-interpolation_files/2018-07-19-interpolation_23_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{2018-07-19-interpolation_files/2018-07-19-interpolation_23_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{2018-07-19-interpolation_files/2018-07-19-interpolation_23_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Each method for choosing sample points naturally corresponds with a
+power series representation of the function to be interpolated.
+
+That is, there's a bijection between the sequence of functions
+\(c_n:\mathbf{N} \to \mathbf{R}^n\) (used to choose sample points
+\(\{x_i : i = 0,1,\ldots, n\}\)) and the partial sums of the
+power-series \(\sum_{k=0}^{n}a_k \prod_{i<k}(x-x_i)\) with the
+coefficients \(a_n\) generated by divided differences. Call this
+power-series \(p_\infty\).
+
+Looking at the above plots, and applying a bit of mind's eye
+real-analytic intuition, I suggest.
+
+\begin{itemize}
+\item
+  When \(p_n\) is generated by Chebyshev points
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(p_\infty(x) = f_1(x)\) for all \(x\) in \([-1,1]\)
+  \item
+    \(p_\infty(x) = f_2(x)\) for all \(x\) in \([-1,1]\setminus \{0\}\)
+  \end{itemize}
+\item
+  When \(p_n\) is generated by linearly spaced points
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(p_\infty(x) = f_1(x)\) at countably many sample points, else
+    nowhere.
+  \item
+    \(p_\infty(x) = f_2(x)\) at countably many sample points, else
+    nowhere.
+  \end{itemize}
+\end{itemize}
+
+In other words, Chebyshev sample points seem to produce sequences of
+polynomials that converge uniformly to the function they interpolate
+(provided that function is continuous), whereas linearly spaced sample
+points (at least on compact sets \([a,b]\) where
+\(\lvert b-a \rvert > 1\)) produce sequences of polynomials that don't
+even converge pointwise to their interpolating functions.
+
+\hypertarget{hermite-interpolation}{%
+\subsubsection{Hermite interpolation}\label{hermite-interpolation}}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

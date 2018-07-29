@@ -26,3 +26,5 @@ for f in [f1,f2]:
         plt.title(f.__name__ + ' approximated by different $p_{%d}$' % n)
         plt.legend((f.__name__,'Linear-spaced $p_{%d}$' % n,'Chebyshev $p_{%d}$' % n))
         plt.show()
+
+
