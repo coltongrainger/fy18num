@@ -1,0 +1,20 @@
+\contentsline {section}{Iterative methods}{1}{section*.2}
+\contentsline {subsection}{Linear Systems}{1}{section*.3}
+\contentsline {subsubsection}{Jacobi method}{2}{section*.4}
+\contentsline {subsubsection}{Gauss-Seidel method}{3}{section*.5}
+\contentsline {subsubsection}{Successive over relaxation}{3}{section*.6}
+\contentsline {subsubsection}{Error analysis}{4}{section*.7}
+\contentsline {subsection}{Nonlinear systems}{5}{section*.8}
+\contentsline {subsubsection}{Newton's method}{5}{section*.9}
+\contentsline {section}{Interpolation}{6}{section*.10}
+\contentsline {subsection}{Polynomial approximation}{6}{section*.11}
+\contentsline {subsubsection}{Lagrange form}{6}{section*.12}
+\contentsline {subsubsection}{Newton form}{9}{section*.13}
+\contentsline {subsubsection}{Matrix interpretation}{11}{section*.14}
+\contentsline {subsubsection}{Error analysis}{12}{section*.15}
+\contentsline {subsection}{Determining the minimal degree}{12}{section*.16}
+\contentsline {subsection}{Summing a set of Lagrange polynomials}{14}{section*.17}
+\contentsline {subsection}{Optimal choice of sample points}{14}{section*.18}
+\contentsline {subsubsection}{Comparison: Chebyshev and linearly spaced points}{16}{section*.19}
+\contentsline {subsubsection}{Hermite interpolation}{19}{section*.20}
+\contentsline {subsection}{Mixed initial conditions}{25}{section*.21}
